@@ -1,0 +1,421 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>CSS Selector</title>
+<style>
+table {
+    width: 98%;
+    margin: 0 auto;
+    font: 12px/1.5 Tahoma, Geneva, sans-serif;
+    border-collapse: collapse;
+}
+tr td:only-child {
+    color: #eee;
+    background-color: #333;
+}
+tr td:first-child:not(:only-child) {
+    width: 50px;
+    text-align: center; 
+}
+</style>
+</head>
+
+<body>
+<table border="1" collapse="0" cellpadding="8">
+    <tr><td colspan="4">一．基本选择器</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>1</td>
+        <td>*</td>
+        <td>通用元素选择器，匹配任何元素</td>
+        <td rowspan="4">{margin:0;padding:0;}<br />
+            P{font-size:2em;}<br />
+            .info{background:red;}<br />
+            p.info{background:yellow;}<br />
+            p.info.error{background:green;}<br />
+            #info{background:blue;}<br />
+            P#info{background:black;}</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>E</td>
+        <td>标签选择器，匹配所有使用E标签的元素</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>.info</td>
+        <td>Class选择器，匹配所有class属性中包含info元素</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>#footer</td>
+        <td>Id选择器，匹配所有id属性等于footer的元素</td>
+    </tr>
+    <tr><td colspan="4">二．多元素的组合选择器</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>5</td>
+        <td>E,F</td>
+        <td>多元素选择器，同时匹配所有E元素或F元素，E和F之间用逗号分隔</td>
+        <td rowspan="4">div p{color:red;}<br />
+            #nav li{display:inline;}<br />
+            #nav a{font-weight:bold;}<br />
+            div&gt;strong{color:green;}<br />
+            p+p{color:yellow;}</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>E
+            F</td>
+        <td>后代元素选择器，匹配所有属于E元素后代的F元素，E和F之间用空格分隔</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>E&gt;F</td>
+        <td>子元素选择器，匹配所有E元素的子元素F</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>E+F</td>
+        <td>毗邻元素选择器，匹配所有紧随E元素之后的同级元素F</td>
+    </tr>
+    <tr><td colspan="4">三．CSS2.1属性选择器 </td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>9</td>
+        <td>E[att]</td>
+        <td>匹配所有具有att属性的E元素，不考虑其它的值（注意：E在此处可以省略，比如”[cheacked]”。）</td>
+        <td rowspan="4">P[title]{color:#f00;}<br />
+            div[class=error]{color:#f00;}<br />
+            td[headers~=col1]{color:#f00;}<br />
+            p[lang|=en]{color:#f00;}<br />
+            blockquote[class=quote][cite]{color:#f00;}</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>E[att=val]</td>
+        <td>匹配所有att属性等于”val”的E元素</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td>E[att~=val]</td>
+        <td>匹配所有att属性具有多个空格分隔的值，其中一个值等于”val”的E元素</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td>E[att|=val]</td>
+        <td>匹配所有att属性具有多个连字号分隔（hyphen-separated）的值，其中一个值以”val”开头的E元素，主要用于lang属性，比如:”en”,”en-us”,”en-gb”等等</td>
+    </tr>
+    <tr><td colspan="4">四．CSS2.1中的伪类</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>13</td>
+        <td>E:first-child</td>
+        <td>匹配父元素的第一个子元素</td>
+        <td rowspan="7">P:first-child{font-style:italic;}<br />
+            Input[type=text]:foucs{color:#f00;background:#ffe;}<br />
+            Input[type=text]:foucs:hover{background:#fff;}<br />
+            q:lang(sv){quotes:”\201D””\201D””\2019””\2019”;}</td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td>E:link</td>
+        <td>匹配所有未被点击的链接</td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td>E:visited</td>
+        <td>匹配所有已被点击的链接</td>
+    </tr>
+    <tr>
+        <td>16</td>
+        <td>E:active</td>
+        <td>匹配鼠标已经其上按下，还没有释放的E元素</td>
+    </tr>
+    <tr>
+        <td>17</td>
+        <td>E:hover</td>
+        <td>匹配鼠标悬停其上的E元素</td>
+    </tr>
+    <tr>
+        <td>18</td>
+        <td>E:focus</td>
+        <td>匹配获得当前焦点的E元素</td>
+    </tr>
+    <tr>
+        <td>19</td>
+        <td>E:lang(c)</td>
+        <td>匹配lang属性等于C的E元素</td>
+    </tr>
+    <tr><td colspan="4">五. CSS2.1中的伪元素</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>20</td>
+        <td>E:first-line</td>
+        <td>匹配E元素的第一行</td>
+        <td rowspan="4">P:first-line{font-weight:bold;color:#600;}<br />
+            .preamble:first-letter{font-size:1.5em;font-weight:bold;}<br />
+            .cbb:before{content:"";display:block;height:17px;width:18px;background:url(top,png) no-repeat 0 0;margin:0 0 0 -18px;}<br />
+            A:link:after{content:"("att(href)")";}</td>
+    </tr>
+    <tr>
+        <td>21</td>
+        <td>E:first-letter</td>
+        <td>匹配E元素的第一个字母</td>
+    </tr>
+    <tr>
+        <td>22</td>
+        <td>E:before</td>
+        <td>在E元素之前插入生成的内容</td>
+    </tr>
+    <tr>
+        <td>23</td>
+        <td>E:after</td>
+        <td>在E元素之后插入生成的内容</td>
+    </tr>
+    <tr><td colspan="4">六．CSS3的同级元素通用选择器</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>24</td>
+        <td>E~F</td>
+        <td>匹配任何在E元素之后的同级F元素</td>
+        <td>P~ul{background:#ff0;}</td>
+    </tr>
+    <tr><td colspan="4">七．CSS3属性选择器</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>25</td>
+        <td>E[att^=”val”]</td>
+        <td>属性att的值以”val”开头的元素</td>
+        <td rowspan="4">Div[id^=”nav”]{background:#ff0;}</td>
+    </tr>
+    <tr>
+        <td>26</td>
+        <td>E[att$=”val”]</td>
+        <td>属性att的值以”val”结尾的元素</td>
+    </tr>
+    <tr>
+        <td>27</td>
+        <td>E[att*=”val”]</td>
+        <td>属性att的值包含”val”字符串的元素</td>
+    </tr>
+    <tr><td colspan="4">八．CSS3中与用户界面有关的伪类</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>28</td>
+        <td>E:enabled</td>
+        <td>匹配表单中激活的元素</td>
+        <td rowspan="4">Input[type=”text”]:disabled{background:#ddd;}</td>
+    </tr>
+    <tr>
+        <td>29</td>
+        <td>E:disabled</td>
+        <td>匹配表单中禁用的元素</td>
+    </tr>
+    <tr>
+        <td>30</td>
+        <td>E:checked</td>
+        <td>匹配表单中被选中的radio（单选框）或checkbox（复选框）元素</td>
+    </tr>
+    <tr>
+        <td>31</td>
+        <td>E::selection</td>
+        <td>匹配用户当前选中的元素</td>
+    </tr>
+    <tr><td colspan="4">九．CSS3中结构性伪类 </td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>32</td>
+        <td>E:root</td>
+        <td>匹配文档的根元素，对于HTML文档，就是HTML元素</td>
+        <td rowspan="11">P:nth-child(3){color:#f00;}<br />
+            P:nth-child(odd){color:#f00;}<br />
+            P:nth-child(even){color:#f00;}<br />
+            P:nth-child(3n+0){color:#f00;}<br />
+            P:nth-child(3n){color:#f00;}<br />
+            tr:nth-child(2n+11){color:#f00;}<br />
+            tr:nth-last-child(2){color:#f00;}<br />
+            p:last-child{ color:#f00;}<br />
+            p:only-child{ color:#f00;}<br />
+            p:empty{ color:#f00;} </td>
+    </tr>
+    <tr>
+        <td>33</td>
+        <td>E:nth-child(n)</td>
+        <td>匹配其父元素的第n个子元素。第一个编号是1</td>
+    </tr>
+    <tr>
+        <td>34</td>
+        <td>E:nth-last-child(n)</td>
+        <td>匹配其父元素的倒数第n额子元素，第一个编号是1</td>
+    </tr>
+    <tr>
+        <td>35</td>
+        <td>E:nth-of-type(n)</td>
+        <td>与nth-child（）作用类似，但是仅匹配使用同种标签的元素</td>
+    </tr>
+    <tr>
+        <td>36</td>
+        <td>E:nth-last-of-type(n)</td>
+        <td>与nth-last- child（）作用类似，但是仅匹配使用同种标签的元素</td>
+    </tr>
+    <tr>
+        <td>37</td>
+        <td>E:last-child</td>
+        <td>匹配父元素的最后一个子元素，等同于：nth-last-
+            child（1）</td>
+    </tr>
+    <tr>
+        <td>38</td>
+        <td>E:first-of-type</td>
+        <td>匹配父元素下使用同种标签的第一个子元素，等同于：nth- of-type（1</td>
+    </tr>
+    <tr>
+        <td>39</td>
+        <td>E:last-of-type</td>
+        <td>匹配父元素下使用同种标签的最后一个子元素，等同于：nth-last-of-type（1）</td>
+    </tr>
+    <tr>
+        <td>40</td>
+        <td>E:only-child</td>
+        <td>匹配父元素下仅有一个子元素，等同于：first-child：last- child e或：nth- child（1）：nth-last- child（1）</td>
+    </tr>
+    <tr>
+        <td>41</td>
+        <td>E:only-of-type</td>
+        <td>匹配父元素下使用同种标签的唯一一个子元素，等同于：first-of-type：last-of-type或：nth-of-type（1）：nth-last-of-type（1）</td>
+    </tr>
+    <tr>
+        <td>42</td>
+        <td>E:empty</td>
+        <td>匹配一个不包含任何子元素的元素，注意，文本节点也被看做子元素</td>
+    </tr>
+    <tr><td colspan="4">十．CSS3的反选伪类 </td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>43</td>
+        <td>E:not(s)</td>
+        <td>匹配不符合当前选择器的任何元素</td>
+        <td>:not(p){border:1px soild red;}</td>
+    </tr>
+    <tr><td colspan="4">十一．CSS3中的:target伪类</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>44</td>
+        <td>E:target</td>
+        <td>匹配文档中特定“id”点击后的效果</td>
+        <td></td>
+    </tr>
+    <tr><td colspan="4">十二. CSS4中的父元素</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>45</td>
+        <td>$E > F</td>
+        <td>该选择器将会把样式显示在包含有 F 的 $E 上</td>
+        <td>/* 样式显示在 li 上 */<br />
+$li > p { border: 1px solid #ccc; }<br />
+/* 样式显示在 ol 上 */<br />
+#wrapper > $ol > li { background:#f8f8f8; }</td>
+    </tr>
+    <tr><td colspan="4">十三. CSS4中的ID匹配</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>46</td>
+        <td>E /foo/ F</td>
+        <td>用双斜杆（//）包含 HTML 属性名。 E /foo/ F 表示选中的所有页面中所有 F 里 ID 值与 E 元素的 foo 属性值相等的。</td>
+        <td><pre>
+&lt;!-- 我们写一个 tab 的时候通常使用这样的情况 --&gt;
+&lt;ul&gt;
+    &lt;li targetID="tab1"&gt;trigger1&lt;/li&gt;
+    &lt;li targetID="tab2"&gt;trigger2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div&gt;
+    &lt;p id="tab1"&gt;tab1 content&lt;/p&gt;
+    &lt;p id="tab2"&gt;tab2 content&lt;/p&gt;
+&lt;/div&gt;
+/* 样式应用与当前 :hover 所在的 li 的 target ID 属性值相等的 p 上 */
+li:hover /targetID/ p { border:2px solid #609060; }
+        </pre></td>
+    </tr>
+    <tr><td colspan="4">十四. CSS4中的匹配伪类</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>47</td>
+        <td>E:matches()</td>
+        <td>匹配伪类语法为：div:matches(s1,s2)，表示当div匹配s1或s2时应用样式</td>
+        <td>Label:matches(:hover,:focus) input
+            {border:1px solid #333;}</td>
+    </tr>
+    <tr><td colspan="4">十五. CSS4中的本地链接伪类 </td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>48</td>
+        <td>E:local-link</td>
+        <td>该伪类多用于a标签，并且可以增加一个数字参数a:local-link(n),n表示匹配目录的级数（path/），序数从0开始的</td>
+        <td>Link1 没有目录级数，匹配a:local-link(0)<br />
+            {Color:blue;}<br />
+            Link2 一级目录，匹配a:local-link(0),
+            a:local-link(1),这样的话样式会被a:local-link(1)覆盖</td>
+    </tr>
+    <tr><td colspan="4">十六. CSS4中的方向伪类 </td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>49</td>
+        <td>E:dir()</td>
+        <td>根据 HTML 属性选中</td>
+        <td><pre>
+选中 &lt;p dir="rtl"&gt;&lt;/p&gt;, 代码：
+p:dir(rtl){color: #888;}
+        </pre></td>
+    </tr>
+    <tr><td colspan="4">十七. CSS4中的默认选项伪类 </td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>49</td>
+        <td>E:default</td>
+        <td>选中多个子元素中的默认元素，比如select中的默认option</td>
+        <td>Option:default{background:red;}</td>
+    </tr>
+    <tr><td colspan="4">十八. CSS4中的表单限制伪类 </td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>50</td>
+        <td>E:require<br />
+            E:optional</td>
+        <td>匹配表单项中必选项和可选项</td>
+        <td>Input:require { color:red;}</td>
+    </tr>
+    <tr><td colspan="4">十九. CSS4中可读可写伪类</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>51</td>
+        <td>E:read-write<br />
+            E:read-only</td>
+        <td>匹配元素是否可读可写</td>
+        <td>E:read-write{font-family:Georgia;}</td>
+    </tr>
+    <tr><td colspan="4" >二十. CSS4中状态伪类</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>52</td>
+        <td>:current<br />
+            :pass<br />
+            :future</td>
+        <td>:pass表示时间线上的前一个元素，如果不在时间线内，则指其前一个元素；
+            :future表示时间线上的后一个元素，如果不在时间线内，则指其后一个元素；</td>
+        <td></td>
+    </tr>
+    <tr><td colspan="4" >二十一. CSS4中尚不明确的选择器</td></tr>
+    <tr><td>序号</td><td>选择器</td><td>含义</td><td>举例</td></tr>
+    <tr>
+        <td>52</td>
+        <td>:vaild<br />
+            :invaild<br />
+            :in-range<br />
+            :out-of-range</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+</body>
+</html>

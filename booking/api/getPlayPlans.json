@@ -1,0 +1,38 @@
+{
+    "code": 0,
+    "message": "Success",
+    "lastVersion": 13591341234121,
+    "totalCount": 31,
+    "data": [
+        {
+            "id": 1,
+            "showDate": "2013-09-22 14:20:00",
+            "standardPrice": 100.00,
+            "price": 42.00,
+            "filmID": 1,
+            "hallId": 2,
+            "hallName": "一号厅",
+            "filmDetailName": "环太平洋3D",
+            "version": "3D",
+            "language": "英文",
+            "seatIsFull": false,
+            "seatsCount": 100,
+            "leftCount": 32
+        },
+        {
+            "id": 2,
+            "showDate": "2013-09-22 18:20:00",
+            "standardPrice": 100.00,
+            "price": 45.00,
+            "filmID": 1,
+            "hallId": 3,
+            "hallName": "三号厅", 
+            "filmDetailName": "环太平洋3DMax",
+            "version": "3DMAX",
+            "language": "英文",
+            "seatIsFull": false,
+            "seatsCount": 120,
+            "leftCount": 68
+        }
+    ]
+}

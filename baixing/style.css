@@ -1,0 +1,56 @@
+.category {
+  margin: 30px auto;
+  width: 980px;
+}
+#colume {
+  margin-right: -20px;
+  *margin-right: -40px;
+  *position: relative;
+  *zoom: 1;
+}
+.colume {
+  float: left;
+  width: 180px;
+  margin-right: 20px;
+}
+.colume a {
+  color: #333;
+  font-size: 14px;
+}
+.colume .hd {
+  padding: 2px 5px;
+  border-bottom: 2px solid #82c727;
+  background: #f7f7f7;
+}
+.colume .hd h3 {
+  display: inline-block;
+  *display: inline;
+}
+.colume .hd a {
+  color: green;
+}
+.colume .hd i {
+  color: #888;
+  font-size: 12px;
+  font-style: normal;
+}
+.colume .bd {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.colume .bd em {
+  display: inline-block;
+  width: 80px;
+  white-space: nowrap;
+}
+.colume .bd a {
+  line-height: 30px;
+}
+.colume .bd a.red {
+  color: red;
+}
+.colume .bd hr {
+  height: 1px;
+  border: 0;
+  border-top: 1px dotted #cfcfcf;
+}

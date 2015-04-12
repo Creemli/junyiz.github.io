@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>XMLHttpRequest与HTTP跨域资源共享</title>
+
+  <meta name="description" content="A jQuery library for modern HTML presentations">
+  <meta name="author" content="Caleb Troughton">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <!-- Core and extension CSS files -->
+  <link rel="stylesheet" href="./deck.js/core/deck.core.css">
+  <link rel="stylesheet" href="./deck.js/extensions/goto/deck.goto.css">
+  <link rel="stylesheet" href="./deck.js/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" href="./deck.js/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" href="./deck.js/extensions/status/deck.status.css">
+  <link rel="stylesheet" href="./deck.js/extensions/hash/deck.hash.css">
+
+  <!-- Theme CSS files (menu swaps these out) -->
+  <link rel="stylesheet" id="style-theme-link" href="./deck.js/themes/style/neon.css">
+  <link rel="stylesheet" id="transition-theme-link" href="./deck.js/themes/transition/horizontal-slide.css">
+
+  <link rel="stylesheet" href="./style.css">
+
+  <link rel="stylesheet" href="./css/prettify.css" />
+  <script src="./js/jquery-1.7.min.js"></script>
+  <script src="./js/prettify.js"></script>
+
+  <script src="./js/modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+<section class="slide">
+  <h1>
+    XMLHttpRequest 2<br>
+    &<br>
+    CORS（跨域资源共享）
+  </h1>
+</section>
+
+<section class="slide">
+  <h2>内容大纲</h2>
+  <h3>1. XMLHttpRequest 2</h3>
+  <h3>2. CORS（跨域资源共享）</h3>
+  <!-- 跨域相关的HTTP头部 -->
+  <h3>3. 为跨域而配置HTTP服务器</h3>
+</section>
+
+<section class="slide">
+  <h1>XMLHttpRequest 2</h1>
+</section>
+
+<section class="slide"><h2>XMLHttpRequest是什么</h2>
+  <blockquote class="slide">
+    The XMLHttpRequest object is the ECMAScript HTTP API
+  </blockquote>
+  <ul>
+    <li class="slide">XMLHttpRequest是一个浏览器接口，使得Javascript可以进行HTTP(S)通信</li>
+    <li class="slide">最早微软在IE5实现了这个接口，因为它太有用，其他浏览器都山寨了一下，于是ajax操作得以诞生</li>
+  </ul>
+</section>
+
+<section class="slide"><h2>老版本的XMLHttpRequest</h2>
+<pre><code>// 新建一个XMLHttpRequest的实例
+var xhr = new XMLHttpRequest();
+
+// 向远程主机发出一个HTTP请求
+xhr.open('GET', 'example.php');
+xhr.send();
+
+// 监控XMLHttpRequest对象的状态变化，指定回调函数
+xhr.onreadystatechange = function(){
+  if (xhr.readyState == 4 && xhr.status == 200) {
+    console.log(xhr.responseText);
+  }
+};</code></pre>
+</section>
+
+<section class="slide"><h2>老版本的XMLHttpRequest缺陷</h2>
+  <ul>
+    <li>只支持文本数据的传送，无法用来读取和上传二进制文件</li>
+    <li>传送和接收数据时，没有进度信息，只能提示有没有完成</li>
+    <li>受到"同域限制"（Same Origin Policy），只能向同一域名的服务器请求数据</li>
+    <!-- 这个接口一直没有标准化，每家浏览器的实现或多或少有点不同。HTML 5的概念形成后，W3C开始考虑标准化这个接口。2008年2月，就提出了XMLHttpRequest Level 2 草案。 -->
+  </ul>
+</section>
+
+<!-- 新版本的XMLHttpRequest对象，针对老版本的缺点，做出了大幅改进。 -->
+<section class="slide"><h2>新版本XMLHttpRequest的改进</h2>
+  <ul>
+    <li>可以设置HTTP请求的时限</li>
+    <li>可以使用FormData对象管理表单数据</li>
+    <li>可以上传文件</li>
+    <li>可以获取服务器端的二进制数据</li>
+    <li>可以获得数据传输的进度信息</li>
+    <li>可以请求不同域名下的数据（跨域请求）</li>
+  </ul>
+</section>
+
+<section class="slide"><h2>HTTP请求的时限</h2>
+  <p>有时，ajax操作很耗时，而且无法预知要花多少时间。如果网速很慢，用户可能要等很久。</p>
+<pre><code>// 最长等待时间设为2000毫秒
+xhr.timeout = 2000;
+
+// 指定timeout事件的回调函数
+xhr.ontimeout = function(event){
+  console.log('请求超时！');
+}</code></pre>
+</section>
+
+<section class="slide"><h2>FormData对象</h2>
+  <p>ajax操作往往用来传递表单数据。为了方便表单处理，HTML5新增了一个FormData对象，可以模拟表单。</p>
+<pre><code>var formData = new FormData(); // 新建一个FormData对象
+
+formData.append('id', 123456); // 添加表单项
+formData.append('name', '李四');
+
+xhr.send(formData); // 用XMLHttpRequest传送FormData对象</code></pre>
+</section>
+
+<!--
+<section class="slide"><h2>上传文件</h2>
+  <pre><code>var formData = new FormData();
+
+for (var i = 0; i < files.length; i++) {
+  formData.append('files[]', files[i]);
+}
+
+xhr.send(formData);</code></pre>
+</section>
+
+<section class="slide"><h2>接收二进制数据</h2>
+  <h3>方法A：重写MIMEType</h3>
+  <pre><code>xhr.overrideMimeType("text/plain; charset=x-user-defined");</code></pre>
+
+  <p>从responseText属性取出服务器返回的二进制数据</p>
+  <pre><code>var binStr = xhr.responseText; </code></pre>
+
+  <p>一个个字节地还原成二进制数据</p>
+  <pre><code>for (var i = 0, len = binStr.length; i < len; ++i) {
+  var c = binStr.charCodeAt(i);
+  var byte = c & 0xff;
+}</code></pre>
+</section>
+
+<section class="slide"><h2>接收二进制数据</h2>
+  <h3>方法B：设置responseType</h3>
+  <pre><code>var xhr = new XMLHttpRequest();
+xhr.open('GET', '/path/to/image.png');
+xhr.responseType = 'blob'; </code></pre>
+  <p>用浏览器自带的Blob对象接收数据</p>
+  <pre><code>var blob = new Blob([xhr.response], {type: 'image/png'});</code></pre>
+</section>
+-->
+
+<section class="slide"><h2>进度信息</h2>
+  <pre><code>xhr.onprogress = updateProgress; // 设置下载进度的回调函数
+xhr.upload.onprogress = updateProgress; // 设置上传进度的回调函数
+
+function updateProgress(event) {
+  if (event.lengthComputable) {
+    var percentComplete = event.loaded / event.total;
+  }
+}</code></pre>
+  <p>与progress事件相关的，还有其他五个事件，可以分别指定回调函数</p>
+  <ul>
+    <li>* load事件：传输成功完成。</li>
+    <li>* abort事件：传输被用户取消。</li>
+    <li>* error事件：传输中出现错误。</li>
+    <li>* loadstart事件：传输开始。</li>
+    <li>* loadEnd事件：传输结束，但是不知道成功还是失败。</li>
+  </ul>
+</section>
+
+<section class="slide"><h2>跨域请求</h2>
+  <p>发送跨域请求的前提，是浏览器必须支持这个功能，而且服务器端必须同意这种"跨域"。如果能够满足上面的条件，则代码的写法与不跨域的请求完全一样。</p>
+  <pre><code>xhr.open('GET', 'http://other.domain/path/to/resource'); </code></pre>
+  <div class="slide">
+    <p>默认状态下，请求不提供证书（cookie、HTTP身份验证、SSL客户端证书）。可以设置withCredentials属性为true，使请求包含证书。</p>
+    <pre><code>xhr.withCredentials = true;</code></pre>
+  </div>
+  <div class="slide">
+    但是，这些cookies仍旧遵守“同域”的准则，并不能从document.cookies或者HTTP响应头当中进行读取
+  </div>
+  <!-- <p>目前，除了IE8和IE9，主流浏览器都支持CORS</p> -->
+</section>
+
+<!-- 新版本的XMLHttpRequest对象，可以向不同域名的服务器发出HTTP请求。这叫做"跨域资源共享"（Cross-origin resource sharing，简称CORS）。 -->
+
+<section class="slide">
+  <h1>CORS（跨域资源共享）</h1>
+</section>
+
+<section class="slide"><h2>跨域请求过程</h2>
+  <img src="./http_preflight.png">
+</section>
+
+<section class="slide"><h2>预请求（preflight request）</h2>
+  <img src="./http_options_header.png">
+</section>
+
+<section class="slide"><h2>POST请求</h2>
+  <img src="./http_post_header.png">
+</section>
+
+<section class="slide"><h2>简单请求</h2>
+  <p>http方法是：HEAD、GET、POST</p>
+  <p>http请求头包含：</p>
+  <ul>
+    <li>Accept</li>
+    <li>Accept-Language</li>
+    <li>Content-Language</li>
+    <li>Last-Event-ID</li>
+    <li>Content-Type ，但仅能是 application/x-www-form-urlencoded、 multipart/form-data、 text/plain </li>
+  </ul>
+</section>
+
+<section class="slide"><h2>与CORS相关的HTTP请求头（Request Header）</h2>
+  <ul>
+    <li>Origin</li>
+    <li>Access-Control-Request-Method</li>
+    该项内容是实际请求的种类，可以是GET、POST之类的简单请求，也可以是PUT、DELETE等等。
+    <li>Access-Control-Request-Headers</li>
+    该项是一个以逗号分隔的列表，当中是复杂请求所使用的头部。
+  </ul>
+</section>
+
+<section class="slide"><h2>与CORS相关的HTTP响应头（Response Header）</h2>
+  <ul>
+    <li>Access-Control-Allow-Origin（必含）</li>
+    不可省略，否则请求按失败处理。该项控制数据的可见范围，如果希望数据对任何人都可见，可以填写“*”。
+    <li>Access-Control-Allow-Headers（可选）</li>
+    当预请求中包含Access-Control-Request-Headers时必须包含，这是对预请求当中Access-Control-Request-Headers的回复，和上面一样是以逗号分隔的列表，可以返回所有支持的头部。
+    <li>Access-Control-Allow-Methods（预请求时，必含）</li>
+    这是对预请求当中Access-Control-Request-Method的回复，这一回复将是一个以逗号分隔的列表。尽管客户端或许只请求某一方法，但服务端仍然可以返回所有允许的方法，以便客户端将其缓存。
+  </ul>
+</section>
+
+<section class="slide"><h2>与CORS相关的HTTP响应头（Response Header）</h2>
+  <ul>
+    <li>Access-Control-Allow-Credentials（可选）</li>
+    该项标志着请求当中是否包含cookies信息，只有一个可选值：true（必为小写）。如果不包含cookies，请略去该项，而不是填写false。这一项与XmlHttpRequest2对象当中的withCredentials属性应保持一致，即withCredentials为true时该项也为true；withCredentials为false时，省略该项不写。反之则导致请求失败。
+    <li>Access-Control-Max-Age （可选）</li>
+    以秒为单位的缓存时间。预请求的的发送并非免费午餐，允许时应当尽可能缓存。
+    <li>Access-Control-Expose-Headers</li>
+    该项确定XmlHttpRequest2对象当中getResponseHeader()方法所能获得的额外信息。
+    通常情况下，getResponseHeader()方法只能获得如下的信息： Cache-Control、Content-Language、 Content-Type、Expires、Last-Modified、Pragma
+  </ul>
+  <!-- <h2>与CORS相关的项目基本都以“Access-Control-”作为前缀</h2> -->
+</section>
+
+<section class="slide"><h1>为跨域而配置HTTP服务器</h1>
+</section>
+
+<section class="slide"><h2>IIS7的配置</h2>
+  <p>对于IIS7来说，在站点的根目录下的<code>web.config</code>文件里添加如下配置：</p>
+  <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;configuration&gt;
+  &lt;system.webServer&gt;
+    &lt;httpProtocol&gt;
+      &lt;customHeaders&gt;
+        &lt;add name=&quot;Access-Control-Allow-Origin&quot; value=&quot;*&quot; /&gt;
+      &lt;/customHeaders&gt;
+    &lt;/httpProtocol&gt;
+  &lt;/system.webServer&gt;
+&lt;/configuration&gt; </code></pre>
+  <p>对于简单的跨域请求，添加<code>Access-Control-Allow-Origin:*</code>就行了</p>
+</section>
+
+
+<section class="slide"><h2>Apache的配置</h2>
+  <p>修改apache.conf或httpd.conf配置文件的Directory, Location, Files或VirtualHost任一部分：
+  <pre><code>Header set Access-Control-Allow-Origin "*"</code></pre>
+
+  <p>对于unix/linux，还可以用如下命令测试是否已正确修改</p>
+  <pre><code>apachectl -t</code></pre>
+</section>
+
+<section class="slide"><h2>Expresss.js or Node.js</h2>
+对于Expresss.js， 只需
+<pre><code>app.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});</code></pre>
+<div class="slide">
+对于Node.js
+<pre><code>https://github.com/junyiz/staticjs
+</div>
+</code></pre>
+</section>
+
+<section class="slide"><h2>enable-cors.org</h2>
+http://enable-cors.org/
+</section>
+
+<section class="slide"><h1>Thanks</h1></section>
+
+<p class="deck-status">
+  <span class="deck-status-current"></span> / <span class="deck-status-total"></span>
+</p>
+
+<form action="." method="get" class="goto-form">
+  <label for="goto-slide">Go to slide:</label>
+  <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+  <datalist id="goto-datalist"></datalist>
+  <input type="submit" value="Go">
+</form>
+
+<!-- <a href="." title="Permalink to this slide" class="deck-permalink">#</a> -->
+
+<!-- Deck Core and extensions -->
+<script src="./deck.js/core/deck.core.js"></script>
+<script src="./deck.js/extensions/hash/deck.hash.js"></script>
+<script src="./deck.js/extensions/menu/deck.menu.js"></script>
+<script src="./deck.js/extensions/goto/deck.goto.js"></script>
+<script src="./deck.js/extensions/status/deck.status.js"></script>
+<script src="./deck.js/extensions/navigation/deck.navigation.js"></script>
+
+<!-- Specific to this page -->
+<script>
+$(function() {
+  // Deck initialization
+  $.deck('.slide');
+  $('pre code').parent().addClass('prettyprint');
+  prettyPrint();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>oninput事件</title>
+</head>
+<body>
+    <div id="section">
+        <div class="header">
+            <h1 class="title">oninput事件</h1>
+            <div class="attribute">
+                <span class="author">Junyi</span><i>/</i>
+                <span class="category">点点滴滴</span><i>/</i>
+                <span class="date">2013-07-16</span>
+            </div>
+        </div>
+        <div class="content"><p>oninput是HTML5的标准事件，当&lt;input&gt;、&lt;textarea&gt;等元素的value属性值由输入设备改变时，就会触发input事件。现代浏览器基本都支持，对于IE6/7/8也有等同的onpropertychange事件可用。</p>
+<p>博客园有一篇介绍“实时监听输入框值变化的完美方案”的文章，见<a href="http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html">原文</a>，其实这并不完美的解决方案，原因是IE9虽然支持oninput事件，但支持的并不完美：对于 BACKSPACE / DEL / do CUT 等操作，IE9并不会触发oninput事件，见<a href="http://stackoverflow.com/questions/6382389/oninput-in-ie9-doesnt-fire-when-we-hit-backspace-del-do-cut">stackOverflow上的问答</a>。</p>
+<p>二者结合一下，很容易写出一个完美的解决方案，下面是针对jQuery的插件写法：</p>
+<pre>
+;(function($) {
+    var i = 0;
+    var obj = {};
+ 
+    $.fn.input = function(callback) {
+        var elem = this;
+        var fn = 'input' + i++;
+        obj[fn] = function() {
+            callback.call(elem, elem.val());
+        }
+ 
+        elem.bind('input', obj[fn]);
+        elem.bind('propertychange', obj[fn]); // for IE6/7/8
+ 
+        // Add events to listen for input in IE9, due to oninput in IE9 
+        // doesn't fire when we hit BACKSPACE / DEL / CUT
+        if (navigator.appName == 'Microsoft Internet Explorer' &#038;&#038; navigator.appVersion.match(/9./i) == '9.') {
+            elem.focus(function() {
+                document.addEventListener('selectionchange', obj[fn], false);
+            });
+            elem.blur(function() {
+                document.removeEventListener('selectionchange', obj[fn], false);
+            });
+        }
+ 
+        return this;
+    };
+})(jQuery);
+</pre>
+<p>使用的时候，只需：</p>
+<pre>
+&lt;input type="text" id="demo" /&gt;
+
+$('#demo').input(function(val) {
+    // do some things
+});
+</pre>
+</div>
+    </div>
+</body>
+</html>  

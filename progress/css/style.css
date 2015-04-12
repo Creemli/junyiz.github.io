@@ -1,0 +1,87 @@
+input {
+	display: block;
+}
+
+
+progress,          /* All HTML5 progress enabled browsers */
+progress[role]     /* polyfill */
+{
+
+	/* Turns off styling - not usually needed, but good to know. */
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	/* gets rid of default border in Firefox and Opera. */ 
+	border: none;
+	
+	/* Dimensions */
+	width: 400px;
+	height: 60px;
+	
+}
+
+/* Polyfill */
+progress[role]:after {
+	background-image: none; /* removes default background from polyfill */
+}
+
+/* Ensure fallback text doesn't appear in polyfill */
+progress[role] strong {
+	display: none;
+}
+
+
+/*
+ * Background of the progress bar background
+ */
+
+/* Firefox and Polyfill */
+progress, progress[role][value] {
+	background: #ffeeee !important; /* !important only needed in polyfill */
+}
+
+/* Chrome */
+progress::-webkit-progress-bar {
+    background: #ffeeee;
+}
+
+
+
+/*
+ * Background of the progress bar value 
+ */
+
+/* Firefox */
+progress::-moz-progress-bar { 
+	background-color: blue;	
+}
+
+/* Chrome */
+progress::-webkit-progress-value {
+	background-color: blue;
+}
+
+/* Polyfill */
+progress[aria-valuenow]:before  {
+	background-color: blue;
+}
+
+/* Indeterminate */
+/* Firefox */
+progress:not([value])::-moz-progress-bar { 
+	background-image:  url(../images/indeter.gif);	
+	
+}
+
+/* Chrome */
+progress:not([value])::-webkit-progress-bar {
+	background-image:  url(../images/indeter.gif);	
+	
+}
+
+/* Polyfill */
+progress[role], progress:not([value])  {
+	background-image: url(../images/indeter.gif) !important;
+	background-size: auto;  /* Needs to be in here for Safari */
+}

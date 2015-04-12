@@ -1,0 +1,65 @@
+/*
+ * Example 2: more graphical
+ */
+
+/* All HTML5 progress enabled browsers */
+progress.example2 {
+
+	/* Turns off styling - not usually needed, but good to know. */
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	
+	/* Apply border. */
+	border: inset 3px;
+	
+	/* Dimensions */
+	width: 242px;
+	height: 45px;
+}
+
+/* Polyfill */
+progress.example2[role]:after {
+	background-image: none; /* removes default background from polyfill */
+}
+
+progress[role] strong {
+	display: none;
+}
+
+
+/*
+ * Background of the progress bar background
+ */
+
+/* Firefox and Polyfill */
+progress.example2 {
+	background: url("../images/example2BW.png") #cccccc !important; /* !important only needed in polyfill */
+}
+/* Chrome */
+progress.example2::-webkit-progress-bar {
+	background: url("../images/example2BW.png") #cccccc;
+}
+
+/*
+ * Background of the progress bar value
+ */
+
+/* Firefox */
+progress.example2::-moz-progress-bar {
+	background: url("../images/example2Color.png") #8f6534;
+}
+/* Chrome */
+progress.example2::-webkit-progress-value {
+	background: url("../images/example2Color.png") #8f6534;
+}
+/* Polyfill */
+progress.example2[aria-valuenow]:before {
+	background: url("../images/example2Color.png") #8f6534;
+}
+
+
+
+input {
+	display: block;
+}

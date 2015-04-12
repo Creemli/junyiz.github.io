@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>regexp</title>
+<style>
+    textarea {
+        width: 600px;
+        height: 300px;
+        border: 1px solid #ccc;
+    }
+    input {
+        width: 500px;
+        height: 32px;
+        border: 1px solid #ccc;
+    }
+    button {
+        width: 105px;
+        height: 36px;
+        border: 1px solid #ccc;
+    }
+    .act {
+        margin: 10px 0;
+    }
+</style>
+</head>
+<body>
+<textarea id="txt"></textarea><br>
+<div class="act">
+    <input id="reg"/><button id="btn">Run</button><br>
+</div>
+<textarea id="ret"></textarea>
+
+<script>
+    var txt = document.querySelector('#txt');
+    var reg = document.querySelector('#reg');
+    var ret = document.querySelector('#ret');
+    var btn = document.querySelector('#btn');
+
+    btn.addEventListener('click', function() {
+        var obj = {};
+        txt.value.replace(eval(reg.value), function() {
+            var args = arguments;
+            for (var i = 0; i < args.length - 2; i++) {
+                (obj[i] || (obj[i] = [])).push(args[i]);
+            }
+        });
+        ret.value = JSON.stringify(obj);
+    });
+</script>
+</body>
+</html>

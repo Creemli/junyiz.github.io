@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>git submodule</title>
+</head>
+<body>
+    <div id="section">
+        <div class="header">
+            <h1 class="title">git submodule</h1>
+            <div class="attribute">
+                <span class="author">Junyi</span><i>/</i>
+                <span class="category">git</span><i>/</i>
+                <span class="date">2012-03-12</span>
+            </div>
+        </div>
+        <div class="content"><h3><a id="场景" name="场景"></a>场景</h3>
+<div>
+<p>某大型网站为了统一网站页头页尾，同时使开发维护工作变得轻松、高效，为页头页尾建立了一个独立的git仓库（common），所以任何一个页面（一般指一个单独的git仓库）用页头页尾时，就必须把common给加入进来。由于common责任重大，更改会影响全站，所以其他仓库在把common加入到自己的仓库时，一般只能使用只读路径。</p>
+</div>
+<h3><a id="准备工作" name="准备工作"></a>准备工作</h3>
+<div>
+<p>为了说清楚这个场景下，如何用Git工作，以及多人协作时的注意事项，我先在/d/www/origin目录下建立两个祼仓库：common.git(公共页头页尾仓库)、tuan.git(公共团购仓库)，命令如下：</p>
+<pre>user@USER-PC /d/www/origin
+$ mkdir common.git
+
+user@USER-PC /d/www/origin
+$ cd common.git/
+
+user@USER-PC /d/www/origin/common.git
+$ git init --bare
+
+user@USER-PC /d/www/origin/common.git (BARE:master)
+$ cd ..
+
+user@USER-PC /d/www/origin
+$ mkdir tuan.git
+
+user@USER-PC /d/www/origin
+$ cd tuan.git/
+
+user@USER-PC /d/www/origin/tuan.git
+$ git init --bare</pre>
+<p>这时用户0在自己的目录(/d/www/pc0)下克隆(git clone)了一个页头页尾仓库，做了一些修改后，提交并推到(git push)公共仓库，如下：</p>
+<pre>user@USER-PC /d/www/pc0
+$ git clone ../origin/common.git
+
+user@USER-PC /d/www/pc0
+$ cd common/
+
+user@USER-PC /d/www/pc0/common (master)
+$ echo pc0 &gt; index.html
+
+user@USER-PC /d/www/pc0/common (master)
+$ git add index.html
+
+user@USER-PC /d/www/pc0/common (master)
+$ git commit -m 'add pc0'
+
+user@USER-PC /d/www/pc0/common (master)
+$ git push origin master</pre>
+<p>此时/d/www/下的目录结构大致如下：</p>
+<pre>/d/www/
+    ├─origin
+    │  ├─common.git
+    │  └─tuan.git
+    └─pc0
+        └─common</pre>
+</div>
+<h3><a id="git_submodule_add" name="git_submodule_add"></a>git submodule add</h3>
+<div>
+<p>用户1从公共仓库克隆(git clone)一个团购仓库到自己的目录/d/www/pc1，命令如下：</p>
+<pre>user@USER-PC /d/www/pc1
+$ git clone ../origin/tuan.git</pre>
+<p>此时/d/www/下的目录结构大致如下：</p>
+<pre>/d/www/
+    ├─origin
+    │  ├─common.git
+    │  └─tuan.git
+    ├─pc0
+    │  └─common
+    └─pc1
+        └─tuan</pre>
+<p>用户1为了在刚刚克隆的/d/www/pc1/tuan仓库中引用commmon.git中的代码，使用git submodule add把common.git加入到自己的仓库/d/www/pc1/tuan，再使用git status查看当前目录，会发现多了两个新文件 common 和 .gitmodules，这时用户1把本次的修改提交(git commit)并推到(git push)公共仓库，完整的命令如下：</p>
+<pre>user@USER-PC /d/www/pc1/tuan
+$ git submodule add ../../common.git
+
+user@USER-PC /d/www/pc1/tuan
+$ git status
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached &lt;file&gt;..." to unstage)
+#
+#       new file:   .gitmodules
+#       new file:   common
+
+user@USER-PC /d/www/pc1/tuan
+$ git add .
+
+user@USER-PC /d/www/pc1/tuan
+$ git ci -m 'add common'
+
+user@USER-PC /d/www/pc1/tuan
+$ git push origin master</pre>
+</div>
+<h3><a id="git_submodule_update_--init" name="git_submodule_update_--init"></a>git submodule update &#8211;init</h3>
+<div>
+<p>用户2为了做需求，也从公共仓库克隆(git clone)了一个团购仓库到自己的目录/d/www/pc2，这时用户2会发现，在目录/d/www/pc2/tuan下已经有 common 和 .gitmodules 这两个文件了，你可能还会发现目录/d/www/pc2/tuan/common其实是一个空目录。这时要获得common中的内容，只需执行如下命令：</p>
+<pre>user@USER-PC /d/www/pc2/tuan
+$ git submodule update --init</pre>
+<p>或</p>
+<pre>user@USER-PC /d/www/pc2/tuan
+$ git submodule init
+
+user@USER-PC /d/www/pc2/tuan
+$ git submodule update</pre>
+</div>
+<h3><a id="后记" name="后记"></a>后记</h3>
+<div>
+<p>上周阿大在分享会上对git submodule进行了讲解，个人觉得讲解的非常给力，所以我在这里整理了下，可以当做文档查看，不妥之处，还请指正。</p>
+</div>
+</div>
+    </div>
+</body>
+</html>  

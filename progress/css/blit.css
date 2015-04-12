@@ -1,0 +1,135 @@
+/* All HTML5 progress enabled browsers */
+progress.monkey {
+
+	/* Turns off styling - not usually needed, but good to know. */
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	/* gets rid of default border in Firefox and Opera. */ 
+	border: none;
+	
+	/* Dimensions */
+	width: 257px;
+	height: 48px;
+	position: relative;
+	top: -26px;
+}
+
+
+progress strong {
+	display: none;
+}
+
+progress.monkey + .after {
+	display: inline-block;
+	width: 64px;
+	height: 77px;
+	
+}
+
+
+progress.monkey[value="0"] +  .after{
+	background: url('../images/monkeyBlit.gif');
+} 
+
+progress.monkey[value^="1"] +  .after {
+	background: url('../images/monkeyBlit.gif') 0  -77px ;
+}
+
+progress.monkey[value^="2"] +  .after {
+	background: url('../images/monkeyBlit.gif') 0  -154px ;
+}
+
+progress.monkey[value^="3"] +  .after,
+progress.monkey[value="100"] +  .after  {
+	background: url('../images/monkeyBlit.gif') 0  -231px !important ;
+}
+
+progress.monkey[value^="4"] +  .after {
+	background: url('../images/monkeyBlit.gif') 0  -308px ;
+}
+
+progress.monkey[value^="5"] +  .after {
+	background: url('../images/monkeyBlit.gif') 0  -385px ;
+}
+
+progress.monkey[value^="6"] +  .after {
+	background: url('../images/monkeyBlit.gif') 0  -462px ;
+}
+
+progress.monkey[value^="7"] +  .after {
+	background: url('../images/monkeyBlit.gif') 0  -539px ;
+}
+
+progress.monkey[value^="8"] +  .after {
+	background: url('../images/monkeyBlit.gif') 0  -616px ;
+}
+
+progress.monkey[value^="9"] +  .after {
+	background: url('../images/monkeyBlit.gif') 0  -693px ;
+}
+
+
+
+
+/* Polyfill */
+progress.monkey[role]:after {
+	background-image: none; /* removes default background from polyfill */
+}
+
+
+/*
+ * Background of the progress bar background
+ */
+
+/* Firefox and Polyfill */
+progress.monkey {
+	background: #cccccc !important; /* !important only needed in polyfill */
+}
+
+/* Chrome */
+progress.monkey::-webkit-progress-bar {
+    background: #cccccc;
+}
+
+
+
+/*
+ * Background of the progress bar value 
+ */
+
+/* Firefox */
+progress.monkey::-moz-progress-bar { 
+	background: url(../images/laughNow2.jpg);	
+}
+
+/* Chrome */
+progress.monkey::-webkit-progress-value {
+	background: url(../images/laughNow2.jpg);	
+}
+
+/* Polyfill */
+progress[aria-valuenow]:before  {
+	background: url(../images/laughNow2.jpg);	
+}
+
+
+/*
+ * Indeterminate 
+ */
+
+/* Firefox */
+progress.monkey:not(value)::-moz-progress-bar { 
+	background: url(../images/pleaseWaitMonkey.jpg);	
+}
+
+/* Chrome */
+progress.monkey:not(value)::-webkit-progress-value {
+	background: url(../images/pleaseWaitMonkey.jpg) !important;	
+}
+
+/* Polyfill */
+progress:not(value)  {
+	background: url(../images/pleaseWaitMonkey.jpg) !important;	
+}

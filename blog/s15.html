@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>git config</title>
+</head>
+<body>
+    <div id="section">
+        <div class="header">
+            <h1 class="title">git config</h1>
+            <div class="attribute">
+                <span class="author">Junyi</span><i>/</i>
+                <span class="category">git</span><i>/</i>
+                <span class="date">2013-04-18</span>
+            </div>
+        </div>
+        <div class="content"><p>系统级配置 $(prefix)/etc/gitconfig<br />
+git config &#8211;system user.name junyi</p>
+<p>用户级配置 $HOME/.gitconfig<br />
+git config &#8211;global user.name junyi</p>
+<p>项目级配置 .git/config<br />
+git config user.name junyi</p>
+<p>设置别名 alias<br />
+git config &#8211;global alias.st status<br />
+git config &#8211;global alias.br branch<br />
+git config &#8211;global alias.ci commit<br />
+git config &#8211;global alias.co checkout</p>
+<p>查看已有的配置<br />
+git config &#8211;system -l<br />
+git config &#8211;global -l<br />
+git config -l</p>
+<p>删除一条配置<br />
+git config &#8211;system &#8211;unset user.name</p>
+<p>查看帮助<br />
+git help config<br />
+或<br />
+git config</p>
+</div>
+    </div>
+</body>
+</html>  

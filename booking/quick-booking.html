@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>快速购票</title>
+    <link rel="stylesheet" href="assets/reset.css"/>
+    <link rel="stylesheet" href="assets/style.css"/>
+    <script src="assets/lib/seajs/sea.js"></script>
+    <script src="assets/main.js"></script>
+</head>
+<body>
+<div class="quick-booking">
+    <div class="choose-list">
+        <div class="city-dropbox dropbox blue">
+            <input type="text" readonly="readonly" value="上海" />
+            <i class="icon-down"></i>
+            <ul id="J_cityList"></ul>
+        </div>
+        <div class="date-dropbox dropbox blue">
+            <input type="text" readonly="readonly" value="今天 2013-09-23" />
+            <i class="icon-down"></i>
+            <ul id="J_dateList">
+                <li><a href="javascript:;">今天 2013-09-23</a></li>
+                <li><a href="javascript:;">明天 2013-09-24</a></li>
+                <li><a href="javascript:;">后天 2013-09-25</a></li>
+                <li><a href="javascript:;">周四 2013-09-26</a></li>
+                <li><a href="javascript:;">周五 2013-09-27</a></li>
+                <li><a href="javascript:;">周六 2013-09-28</a></li>
+                <li><a href="javascript:;">周日 2013-09-29</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="tab-nav">
+        <ul>
+            <li class="item1"><a href="javascript:;" id="J_movieBuy">影片购票</a></li>
+            <li class="item2"><a href="javascript:;" id="J_cinemaBuy">影院购票</a></li>
+            <li class="item3"><a href="javascript:;" id="J_fuzzyFilter">模糊筛选</a></li>
+            <li class="item4"><a href="javascript:;" id="J_advancedSearch">高级搜索</a></li>
+            <li class="item5">上映影院:<span id="J_cinemaCount">0</span>家  共搜到影片:<span id="J_movieCount">0</span>部</li>
+        </ul>
+    </div>
+
+    <div id="J_normalFilterBox">
+        <div class="tab-content">
+            <div class="select-box select-movie" id="J_selectMovie" style="margin-right:10px">
+                <h3>影片名称</h3>
+                <div class="select-btn">
+                    <div class="dropbox orange">
+                        <input type="text" readonly="readonly" value="全部语言" id="languageStatus" />
+                        <i class="icon-down"></i>
+                        <ul>
+                            <li><a href="javascript:;">全部语言</a></li>
+                            <li><a href="javascript:;">普通话</a></li>
+                            <li><a href="javascript:;">英语</a></li>
+                            <li><a href="javascript:;">法语</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropbox orange">
+                        <input type="text" readonly="readonly" value="全部版本" id="editionStatus" />
+                        <i class="icon-down"></i>
+                        <ul>
+                            <li><a href="javascript:;">全部</a></li>
+                            <li><a href="javascript:;">2D</a></li>
+                            <li><a href="javascript:;">2DIMAX</a></li>
+                            <li><a href="javascript:;">3D</a></li>
+                            <li><a href="javascript:;">3DIMAX</a></li>
+                            <li><a href="javascript:;">IMAX</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="scroll-box">
+                    <ul class="movie-list" id="J_movieList"></ul>
+                </div>
+            </div>
+            <div class="select-box select-cinema" id="J_selectCinema" style="margin-right:10px">
+                <h3>影院名称</h3>
+                <div class="select-btn">
+                    <div class="zone-dropbox dropbox orange">
+                        <input type="text" readonly="readonly" value="所有城区" />
+                        <i class="icon-down"></i>
+                        <ul id="J_zoneList"></ul>
+                    </div>
+                    <div class="visited-dropbox dropbox orange">
+                        <input type="text" readonly="readonly" value="我常去的影院" />
+                        <i class="icon-down"></i>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <input class="search-txt" type="text" placeholder="请输入搜索内容" />
+                    <input class="search-btn" type="button" />
+                </div>
+                <div class="scroll-box">
+                    <ul class="cinema-list" id="J_cinemaList"></ul>
+                </div>
+            </div>
+            <div class="select-box select-session">
+                <h3>影片场次</h3>
+                <div class="session-box">
+                    <div class="session-title">
+                        <span class="session">场次</span>
+                        <span class="office">厅</span>
+                        <span class="seats">座位数</span>
+                        <span class="lang">语言版本</span>
+                        <span class="price">现价</span>
+                        <span class="promo">优惠信息</span>
+                    </div>
+                    <div class="session-content" id="J_sessionContent"></div>
+                </div>
+            </div>
+        </div>
+        <div class="step">
+            <ul>
+                <li class="step1 pass">
+                    <div class="number">1</div>
+                    <div class="tips">您选择了</div>
+                    <div class="text" id="J_selectedDate">今天 2013-09-23</div>
+                </li>
+                <li class="step2" id="J_step2">
+                    <div class="number">2</div>
+                    <div class="tips movie-name">您选择的影片</div>
+                    <div class="text" id="J_selectedMovie"></div>
+                </li>
+                <li class="step3" id="J_step3">
+                    <div class="number">3</div>
+                    <div class="tips cinema-name">选择影院名称</div>
+                    <div class="text" id="J_selectedCinema"></div>
+                </li>
+                <li class="step4" id="J_step4">
+                    <div class="number">4</div>
+                    <div class="tips">选择影片场次</div>
+                    <div class="text" id="J_selectedSession"></div>
+                </li>
+                <li class="step5" id="J_step5"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="J_fuzzyFilterBox" style="display:none">
+        <div class="tab-content fuzzy">
+            <div class="select-box select-movie" style="margin-right:10px">
+                <h3>影片名称</h3>
+                <div class="select-btn">
+                    <div class="dropbox orange">
+                        <input type="text" readonly="readonly" value="全部语言" id="languageStatus" />
+                        <i class="icon-down"></i>
+                        <ul>
+                            <li><a href="javascript:;">全部语言</a></li>
+                            <li><a href="javascript:;">普通话</a></li>
+                            <li><a href="javascript:;">英语</a></li>
+                            <li><a href="javascript:;">法语</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropbox orange">
+                        <input type="text" readonly="readonly" value="全部版本" id="editionStatus" />
+                        <i class="icon-down"></i>
+                        <ul>
+                            <li><a href="javascript:;">全部</a></li>
+                            <li><a href="javascript:;">2D</a></li>
+                            <li><a href="javascript:;">2DIMAX</a></li>
+                            <li><a href="javascript:;">3D</a></li>
+                            <li><a href="javascript:;">3DIMAX</a></li>
+                            <li><a href="javascript:;">IMAX</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="scroll-box">
+                    <ul class="movie-list" id="J_fuzzyMovieList">
+                        <!-- <li class="pink" data-movie-id="1"> -->
+                            <!-- <a class="pic" href="#"><img src="http://203.148.12.125:3001/p/0/0/2/ae90fde4_2013091701531333657_690*217.jpg"></a> -->
+                            <!-- <div class="info"> -->
+                                <!-- <a href="#" class="name">侏罗纪公园3D</a> -->
+                                <!-- <p class="star"><span class="star9"></span><em>9.2</em></p> -->
+                                <!-- <p>电影类型：科幻,战争</p> -->
+                            <!-- </div> -->
+                        <!-- </li> -->
+                        <!-- <li class="pink" data-movie-id="2"> -->
+                            <!-- <a class="pic" href="#"><img src="http://203.148.12.125:3001/p/0/0/2/ae90fde4_2013091701531333657_690*217.jpg"></a> -->
+                            <!-- <div class="info"> -->
+                                <!-- <a href="#" class="name">侏罗纪公园3D</a> -->
+                                <!-- <p class="star"><span class="star9"></span><em>9.2</em></p> -->
+                                <!-- <p>电影类型：科幻,战争</p> -->
+                            <!-- </div> -->
+                        <!-- </li> -->
+                        <!-- <li data-movie-id="3"> -->
+                            <!-- <a class="pic" href="#"><img src="http://203.148.12.125:3001/p/0/0/2/ae90fde4_2013091701531333657_690*217.jpg"></a> -->
+                            <!-- <div class="info"> -->
+                                <!-- <a href="#" class="name">侏罗纪公园3D</a> -->
+                                <!-- <p class="star"><span class="star9"></span><em>9.2</em></p> -->
+                                <!-- <p>电影类型：科幻,战争</p> -->
+                            <!-- </div> -->
+                        <!-- </li> -->
+                        <!-- <li data-movie-id="4"> -->
+                            <!-- <a class="pic" href="#"><img src="http://203.148.12.125:3001/p/0/0/2/ae90fde4_2013091701531333657_690*217.jpg"></a> -->
+                            <!-- <div class="info"> -->
+                                <!-- <a href="#" class="name">侏罗纪公园3D</a> -->
+                                <!-- <p class="star"><span class="star9"></span><em>9.2</em></p> -->
+                                <!-- <p>电影类型：科幻,战争</p> -->
+                            <!-- </div> -->
+                        <!-- </li> -->
+                        <!-- <li class="pink" data-movie-id="5"> -->
+                            <!-- <a class="pic" href="#"><img src="http://203.148.12.125:3001/p/0/0/2/ae90fde4_2013091701531333657_690*217.jpg"></a> -->
+                            <!-- <div class="info"> -->
+                                <!-- <a href="#" class="name">侏罗纪公园3D</a> -->
+                                <!-- <p class="star"><span class="star9"></span><em>9.2</em></p> -->
+                                <!-- <p>电影类型：科幻,战争</p> -->
+                            <!-- </div> -->
+                        <!-- </li> -->
+                        <!-- <li class="pink" data-movie-id="6"> -->
+                            <!-- <a class="pic" href="#"><img src="http://203.148.12.125:3001/p/0/0/2/ae90fde4_2013091701531333657_690*217.jpg"></a> -->
+                            <!-- <div class="info"> -->
+                                <!-- <a href="#" class="name">侏罗纪公园3D</a> -->
+                                <!-- <p class="star"><span class="star9"></span><em>9.2</em></p> -->
+                                <!-- <p>电影类型：科幻,战争</p> -->
+                            <!-- </div> -->
+                        <!-- </li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="select-box select-cinema" style="margin-right:10px">
+                <h3>影院名称</h3>
+                <div class="select-btn">
+                    <div class="zone-dropbox dropbox orange">
+                        <input type="text" readonly="readonly" value="所有城区" />
+                        <i class="icon-down"></i>
+                        <ul id="J_zoneList"></ul>
+                    </div>
+                    <div class="visited-dropbox dropbox orange">
+                        <input type="text" readonly="readonly" value="我常去的影院" />
+                        <i class="icon-down"></i>
+                    </div>
+                </div>
+                <div class="search-box">
+                    <input class="search-txt" type="text" placeholder="请输入搜索内容" />
+                    <input class="search-btn" type="button" />
+                </div>
+                <div class="scroll-box">
+                    <ul class="cinema-list" id="J_fuzzyCinemaList">
+                        <!-- <li data&#45;cinema&#45;id="1"><a href="javascript:;">新上海影城</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="2"><a href="javascript:;">上海庆春电影城</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="3"><a href="javascript:;">上海新世纪影城</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="4"><a href="javascript:;">上海开元地中海影城</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="5"><a href="javascript:;">万达影城</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="6"><a href="javascript:;">左岸国际影城松江店</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="7"><a href="javascript:;">上海UME国际影城新天地店</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="8"><a href="javascript:;">世贸时尚欢乐影城松江店</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="9"><a href="javascript:;">世贸时尚欢乐影城松江店</a></li> -->
+                        <!-- <li data&#45;cinema&#45;id="10"><a href="javascript:;">世贸时尚欢乐影城松江店</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="select-box select-session">
+                <h3>放映阶段</h3>
+                <div class="session-content" id="J_fuzzySessionContent">
+                    <!-- <a href="javascript:;" data-show-date="2013-09-10">9月10日</a> -->
+                    <!-- <a class="pink" href="javascript:;" data-show-date="2013-09-11">9月11日</a> -->
+                </div>
+            </div>
+        </div>
+        <div class="selected-icon">
+            <div class="white" data-color="white" id="J_whiteIcon"></div>
+            <div class="blue" data-color="blue" id="J_blueIcon"></div>
+        </div>
+
+        <div class="selected-table">
+            <div class="table-head">
+                <div style="width:19px;padding:10px"></div>
+                <div id="J_dateContainer" style="width:960px;border-left:1px solid #fff"></div>
+            </div>
+            <div class="table-body">
+                <div class="th" id="J_cinemaContainer1" style="height:99px;border-top:1px solid #fff;border-bottom:1px solid #fff;"></div>
+                <div class="td J_sessionContainer"></div>
+            </div>
+            <div class="table-body">
+                <div class="th" id="J_cinemaContainer2" style="height:101px;"></div>
+                <div class="td J_sessionContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/tpl" id="pop-tpl">
+    <div class="pop">
+        <div class="hall-name">{{hallName}}</div>
+        <div class="film-name">{{filmName}}</div>
+        <b class="arrow"></b><i class="arrow"></i>
+    </div>
+    </script>
+
+    <script type="text/tpl" id="dropbox-tpl">
+    {{#data}}
+        <li><a data-id="{{id}}" href="javascript:;">{{name}}</a></li>
+    {{/data}}
+    </script>
+
+    <script type="text/tpl" id="movie-tpl">
+    {{#data}}
+        <li data-movie-id="{{id}}">
+        <a class="pic" href="#"><img src="{{imageUrl}}"></a>
+            <div class="info">
+                <a href="#" class="name">{{name}}</a>
+                <p class="star"><span class="star{{formatStar grade}}"></span><em>{{formatGrade grade}}</em></p>
+                <p>电影类型：{{tags}}</p>
+                <p>上映时间：{{showDate}}</p>
+            </div>
+        </li>
+    {{/data}}
+    </script>
+
+    <script type="text/tpl" id="movie-tpl2">
+    {{#data}}
+        <li data-movie-id="{{id}}" {{parity2}}>
+        <a class="pic" href="#"><img src="{{imageUrl}}"></a>
+            <div class="info">
+                <a href="#" class="name">{{name}}</a>
+                <p class="star"><span class="star{{formatStar grade}}"></span><em>{{formatGrade grade}}</em></p>
+                <p>电影类型：{{tags}}</p>
+            </div>
+        </li>
+    {{/data}}
+    </script>
+
+    <script type="text/tpl" id="cinema-tpl">
+    {{#data}}
+        <li data-cinema-id="{{id}}"><a href="javascript:;">{{name}}</a></li>
+    {{/data}}
+    </script>
+
+    <script type="text/tpl" id="session-tpl">
+    {{#data}}
+        <a data-session-id="{{id}}" {{parity @index}} href="javascript:;">
+            <span class="session">{{formatSession showDate}}</span>
+            <span class="office">{{hallId}}号厅</span>
+            <span class="seats">{{seatsCount}}</span>
+            <span class="lang">{{language}}{{version}}</span>
+            <span class="price">{{price}}元</span>
+            <span class="promo">
+                <em class="hui"></em>
+                <em class="quan"></em>
+                <em class="ji"></em>
+            </span>
+        </a>
+    {{/data}}
+    </script>
+
+    <script type="text/tpl" id="session-tpl2">
+    {{#data}}
+        <a data-show-date="{{showDate}}" {{parity @index}} href="javascript:;">{{showDate}}</a>
+    {{/data}}
+    </script>
+</div>
+</body>
+</html>

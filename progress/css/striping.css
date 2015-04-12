@@ -1,0 +1,162 @@
+
+/*
+ * Candy Striping Example
+ */
+
+/* All HTML5 progress enabled browsers */
+progress.example4 {
+
+	/* Turns off styling - not usually needed, but good to know. */
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+
+	/* gets rid of default border in Firefox and Opera. */ 
+	border: solid #cccccc 5px;
+	
+	border-radius: 10px;
+	
+	/* Dimensions */
+	width: 238px;
+	height: 45px;
+	
+}
+
+/* Polyfill */
+progress.example4[role]:after {
+	background-image: none; /* removes default background from polyfill */
+}
+
+progress.example4[role] strong {
+	display: none;
+}
+
+
+/*
+ * Background of the progress bar background
+ */
+
+/* Firefox and Polyfill */
+progress.example4 {
+	background: #cccccc !important; /* !important only needed in polyfill */
+}
+
+/* Chrome */
+progress.example4::-webkit-progress-bar {
+    background: #cccccc;
+}
+
+
+/*
+ * Background of the progress bar value 
+ */
+
+/* Firefox */
+progress.example4::-moz-progress-bar { 
+		border-radius: 5px;
+        background-image:
+                -moz-linear-gradient(
+                  -45deg,
+              rgba(255, 255, 255, .2) 25%,
+              transparent 25%,
+              transparent 50%,
+              rgba(255, 255, 255, .2) 50%,
+              rgba(255, 255, 255, .2) 75%,
+              transparent 75%,
+              transparent
+           );
+
+        
+
+}
+
+/* Chrome */
+progress.example4::-webkit-progress-value {
+	border-radius: 5px;
+	background-image:
+           -webkit-gradient(linear, 0 0, 100% 100%,
+              color-stop(.25, rgba(255, 255, 255, .2)),
+              color-stop(.25, transparent), color-stop(.5, transparent),
+              color-stop(.5, rgba(255, 255, 255, .2)),
+              color-stop(.75, rgba(255, 255, 255, .2)),
+              color-stop(.75, transparent), to(transparent)
+           );
+        background-image:
+                -webkit-linear-gradient(
+                  -45deg,
+              rgba(255, 255, 255, .2) 25%,
+              transparent 25%,
+              transparent 50%,
+              rgba(255, 255, 255, .2) 50%,
+              rgba(255, 255, 255, .2) 75%,
+              transparent 75%,
+              transparent
+           );
+
+}
+
+/* Polyfill */
+progress.example4[aria-valuenow]:before  {
+	border-radius: 5px;
+	background-image:
+           -webkit-gradient(linear, 0 0, 100% 100%,
+              color-stop(.25, rgba(255, 255, 255, .2)),
+              color-stop(.25, transparent), color-stop(.5, transparent),
+              color-stop(.5, rgba(255, 255, 255, .2)),
+              color-stop(.75, rgba(255, 255, 255, .2)),
+              color-stop(.75, transparent), to(transparent)
+           );
+        background-image:
+                -webkit-linear-gradient(
+                  -45deg,
+              rgba(255, 255, 255, .2) 25%,
+              transparent 25%,
+              transparent 50%,
+              rgba(255, 255, 255, .2) 50%,
+              rgba(255, 255, 255, .2) 75%,
+              transparent 75%,
+              transparent
+           );
+        background-image:
+                -moz-linear-gradient(
+                  -45deg,
+              rgba(255, 255, 255, .2) 25%,
+              transparent 25%,
+              transparent 50%,
+              rgba(255, 255, 255, .2) 50%,
+              rgba(255, 255, 255, .2) 75%,
+              transparent 75%,
+              transparent
+           );
+        background-image:
+                -ms-linear-gradient(
+                  -45deg,
+              rgba(255, 255, 255, .2) 25%,
+              transparent 25%,
+              transparent 50%,
+              rgba(255, 255, 255, .2) 50%,
+              rgba(255, 255, 255, .2) 75%,
+              transparent 75%,
+              transparent
+           );
+        background-image:
+                -o-linear-gradient(
+                  -45deg,
+              rgba(255, 255, 255, .2) 25%,
+              transparent 25%,
+              transparent 50%,
+              rgba(255, 255, 255, .2) 50%,
+              rgba(255, 255, 255, .2) 75%,
+              transparent 75%,
+              transparent
+           );
+
+        
+}
+
+input {
+	display: block;
+}
+
+
+	

@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.seats {
+    width: 878px;
+    margin: 20px auto;
+    padding: 15px 50px 20px;
+    border: 1px solid #bfbfbf;
+    background-color: #fff;
+}
+.seats .seats-icon {
+    padding: 10px 20px;
+    text-align: center;
+}
+.seats .seats-icon span {
+    padding-left: 30px;
+    margin-right: 10px;
+    line-height: 22px;
+    display: inline-block;
+    background: url(seats-icon.png) no-repeat 0 0;
+}
+.seats .seats-icon .has-seat { background-position: 0 -9px; }
+.seats .seats-icon .selected-seat { background-position: 0 -49px; }
+.seats .seats-icon .sold-seat { background-position: 0 -89px; }
+
+.seats .screen {
+    color: #626262;
+    line-height: 40px;
+    text-align: center;
+    background: url(screen.png) no-repeat center 0;
+}
+.seats .tips {
+    line-height: 25px;
+    color: #959595;
+    font-size: 12px;
+    text-align: center;
+}
+
+.seats .seats-view {
+    margin-top: 20px;
+    overflow: hidden;
+}
+.seats .seats-rank {
+    float: left;
+    text-align: center;
+    width: 49px;
+}
+.seats .seats-rank span {
+    height: 38px;
+    color: #626262;
+    display: block;
+    font-size: 16px;
+    line-height: 35px;
+}
+.seats .seats-list {
+    float: left;
+    width: 780px;
+}
+.seats .seats-line {
+    padding: 5px 0;
+    height: 28px;
+    font-size: 0;
+    text-align: center;
+    _overflow: hidden;
+}
+.seats .seats-line span {
+    display: inline-block;
+    padding: 0 3px;
+    *padding: 0 2px;
+    width: 24px;
+    height: 28px;
+}
+.seats .seats-line .has-seat {
+    cursor: pointer;
+    background: url(seats-icon.png) no-repeat 3px -9px;
+}
+.seats .seats-line .selected-seat {
+    cursor: pointer;
+    background: url(seats-icon.png) no-repeat 3px -49px;
+}
+.seats .seats-line .sold-seat {
+    cursor: pointer;
+    background: url(seats-icon.png) no-repeat 3px -89px;
+}

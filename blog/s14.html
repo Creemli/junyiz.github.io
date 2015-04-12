@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mac技巧</title>
+</head>
+<body>
+    <div id="section">
+        <div class="header">
+            <h1 class="title">Mac技巧</h1>
+            <div class="attribute">
+                <span class="author">Junyi</span><i>/</i>
+                <span class="category">点点滴滴</span><i>/</i>
+                <span class="date">2013-03-16</span>
+            </div>
+        </div>
+        <div class="content"><p>1. 使用Safari或Chrome浏览网页的时候，如果你想把当前页面通过邮件发送给自己或别人，使用command+I，可以直接打开邮件并把当前网页附加到待发送的邮件中</p>
+<p>2. 在Finder中选中文件，使用command+delete删除文件，如果想彻底删除，使用shift+command+delete就会自动清空废纸篓（有确认），Shift+Option+Command+Delete 直接清倒废纸篓</p>
+<p>3. 在终端中输入：du -sh * 查看当前目录下各个文件和子目录各占多少空间，du -sh file 查看文件或目录file占用的多少空间</p>
+<p>4. 在Finder中打开文件使用鼠标双击或command+O，和Windows不一样的是，选中文件回车是对文件重命名，而不是打开文件</p>
+<p>5. shift+command+3：全屏幕截图；shift+command+4：通过鼠标选取截图。截取的图片默认存放在桌面上，以时间命名。系统默认截图格式是png，你可以通过如下命令修改截图文件类型，例如：defaults write com.apple.screencapture type -string JPEG</p>
+<p>6. TotalFinder：Finder的增强插件，Finder的插件，为Finder增加多标签（类似Chrome的多页签）、双面板、UI设置等功能，收费软件。同类的免费软件XtraFinder。</p>
+<p>7. 打开终端输入top，可以显示目前系统的进程情况、CPU使用情况、内存使用情况、磁盘使用情况和进程的详细列表等信息，输入? 会显示帮助信息，参考帮助你还可以自定义top显示的信息，输入q退出监控界面</p>
+<p>8. htop是更聪明更高级的top，虽然不是Mac原生的，但安装非常方便。打开终端输入：sudo port install htop，命令结束就安装完成了。然后键入htop，你会看到一个更丰富的彩色的top，多个CPU、内存统计、uptime，更详细的进程信息。参考界面最底部的帮助信息还可以对进行排序、展开、Kill。输入q退出监控界面。我用brew安装： sudo brew install htop-osx</p>
+<p>9. Alfred，一款快速启动App的免费小工具，安装后用alt+space呼出，输入任何一款应用程序的中文或英文名称，即可快速定位程序，回车打开。另外Alfred的窗口还可以做计算器，直接输入表达式即可进行计算，还可以通过 find+文件名 直接定位文件。</p>
+<p>10. 同组程序的切换，比如你打开了多个预览程序阅读pdf，你想在这些pdf之间切换阅读，这时候就可以使用command+`（esc下面的键）进行同组程序切换</p>
+<p>11. 自定义Finder的工具栏：在Finder的工具栏上“辅助点按”，选择“自定义工具栏”，然后将你喜爱的项目拖入工具栏</p>
+<p>12. Go2Shell，我们通过Finder浏览文件的时候，常常需要在浏览的文件目录中打开终端进行操作，Go2Shell就能自动做到这一点。从App Store下载这个免费软件（https://itunes.apple.com/us/app/go2shell/id445770608?mt=12）。下载完成后从应用程序文件夹把Go2Shell拖到Finder工具栏上，然后随便进入一个目录，点击Go2Shell图标，即可打开终端进入该目录。Go2Shell支持原生终端、iTerm2和xterm，比我之前用过的&gt;cd to &#8230;app方便。在终端输入open -a Go2Shell &#8211;args config即可进入配置界面，选择你喜欢的终端。</p>
+<p>13. 如果你在一个屏幕内打开了多个程序，除了当前激活的软件窗口，你还想看看其他窗口的内容，这时你直接点击其他窗口的话，原来的窗口就可能被遮挡或消失。如何保持原来的窗口一直处于最上层呢？非常简单，拖拽其他窗口的时候按住command键即可，原来的窗口会永远在最上面。</p>
+<p>14. 在windows中大家经常选中多个文件，右键-属性可以查看这些文件的大小。在Mac里同样的操作（选中多个文件，右键-显示简介），弹出的是各个文件或文件夹的简介，这让很多童靴困惑不解。其实我们只要在点右键的同时按住option键，显示简介就会变成显示检查器，点击显示检查器即可查看和操作批量文件。另外，我还经常用这种方式浏览图片，比如选中多张图片，option+右键，选中“幻灯片显示xx项”，就可以全屏浏览图片了。</p>
+<p>15. 有时我们需要放大屏幕做一些精细的操作，ctrl+鼠标滚轮可以实现这一效果，如果你是键盘控，用option+command加上加减号也可以实现。</p>
+<p>16. 快速查看 OS X提供了非常方便的预览文件内容的功能。在Finder或桌面上，选中一个文件并按空格键，系统就会弹出预览界面。对于很多文件我们仅仅使用快速查看功能就可以浏览文件内容了，比如iWorks的keynote、pages、numbers，微软Ofiice的文档，pdf，图片，视频，各类文本文件等等。 除了在Finder和桌面快速查看文件，我们还可以快速浏览邮件的附件。打开邮件程序，找到一个带有附件的邮件，选中附件并按空格键，就可以快速浏览附件内容。 我们还可以在终端操作的时候使用这个功能，例如qlmanage -p 文件名，系统就会弹出快速查看窗口。</p>
+<p>17. 显示桌面 我们下载文件或临时文件经常会放到桌面上，在Windows里通过win+d或点按显示桌面的图标即可，在Mac里如何实现呢？ 有两种方式，都很方便，第一种是四指划开，该功能可以在触控板里设置。还有一种方式是通过快捷键command+F3，即可实现移开程序显示桌面的功能。</p>
+<p>18. 如何复制某个目录下所有文件的文件名列表呢？非常简单，command+a，command+c。然后打开一个文本编辑器（比如TextMate），command+v即可</p>
+<p>19. OS X的预览程序可以打开各类图片和pdf等类型的文件，当你想查看某个图片或pdf的细节时，没必要用command+±来缩放整个文件，使用`键可以呼出放大镜，细节一览无遗。</p>
+<p>20. OS X系统登录后会自动启动一些程序，比如alfred、拼音输入法、风扇控制软件等等，有时我们会嫌多，有时又想增加一些启动项，在哪设置呢？打开系统偏好设置-用户与群组，选中当前用户，点击右边的登录项，你就会看到系统启动时加载的程序，可以随意删减，还能够设置启动后隐藏，非常方便。</p>
+<p>文章整理自池建强推送的“Mac技巧”，主要为方便自己查看，所以去掉了前面的“扯淡”部分。如果你觉得有用，推荐关注作者的微信号sagacity-mac，或到图灵社区查看“<a href="http://www.ituring.com.cn/minibook/516" target="_blank">Mac技巧合集</a>”。</p>
+</div>
+    </div>
+</body>
+</html>  

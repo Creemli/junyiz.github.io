@@ -1,0 +1,42 @@
+body, div, ul, li {
+    padding: 0; 
+    margin: 0;
+}
+#bricks {
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    width: 400px;
+    height: 248px;
+    margin: 20px auto;
+    border: 1px solid #080808;
+    box-shadow: 0 0 20px #333;
+}
+#bricks ul {
+    height: 90px;
+}
+#bricks li {
+    position: absolute;
+    width: 78px;
+    height: 28px;
+    list-style: none;
+    border:1px solid #080808;
+}
+#ball {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #666;
+    border-radius: 10px;
+    background-color: #555;
+}
+#board {
+    position: absolute;
+    width: 78px;
+    height: 18px;
+    border: 1px solid #666;
+    background-color: #666;
+}
+#board:hover {
+    cursor: move;
+}

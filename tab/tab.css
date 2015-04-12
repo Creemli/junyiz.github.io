@@ -1,0 +1,40 @@
+#content {
+    width: 990px;
+    margin: 30px auto;
+}
+#tab-nav {
+    overflow: auto;
+    border-left: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
+}
+#tab-nav li {
+    float: left;
+    width: 163px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #f7f8fb;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    cursor: pointer;
+}
+#tab-nav li a {
+    display: block;
+}
+#tab-nav .active {
+    width: 168px;
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+#tab-con {
+    padding-top: 10px;
+}
+#tab-con li {
+    float: left;
+    padding: 10px;
+    margin: 0 25px 20px 0;
+    border: 1px solid #e5e5e5;
+}
+#tab-con a {
+    display: block;
+}

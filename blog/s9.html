@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>使用acp.vim时在输入class时出错的解决办法</title>
+</head>
+<body>
+    <div id="section">
+        <div class="header">
+            <h1 class="title">使用acp.vim时在输入class时出错的解决办法</h1>
+            <div class="attribute">
+                <span class="author">Junyi</span><i>/</i>
+                <span class="category">vim</span><i>/</i>
+                <span class="date">2012-09-15</span>
+            </div>
+        </div>
+        <div class="content"><p>使用AutoComplPop作为vim的自动补全工具，当在html页面中输入class时，vim会报下面这样的错误：</p>
+<pre>Error detected while processing function htmlcomplete#complete tags:
+line 304
+E121: Undefined variable :classlines</pre>
+<p>这个错误是$VIMRUNTIME/autoload/htmlcomplete.vim引起的，所以解决办法就是修改htmlcomplete.vim这个文件，这里记录一下在网上找到的解决办法：<br />
+台湾同胞othree的解决方法：<br />
+把htmlcomplete.vim的310行给移到308行前面</p>
+<pre>
+308        endif
+309    " We gathered classes definitions from all external files
+310    let classes += classlines
+</pre>
+<pre>
+308          " We gathered classes definitions from all external files
+309          let classes += classlines
+310      endif
+</pre>
+<p>老外Ryan Westphal的解决方法：<br />
+在autoload/htmlcomplete.vim文件的第288行之前加入以下代码：</p>
+<pre>
+let classlines = []
+</pre>
+<p>for循环看起来是下面这样：</p>
+<pre>
+for file in cssfiles
+ let classlines = []
+ if filereadable(file)
+  let stylesheet = readfile(file)
+  let stylefile = join(stylesheet, ' ')
+  let stylefile = substitute(stylefile, '+>\*[,', ' ', 'g')
+  if search_for == 'class'
+   let stylesheet = split(stylefile)
+   let classlines = filter(copy(stylesheet), "v:val =~ '\\([a-zA-Z0-9:]\\+\\)\\?\\.[a-zA-Z0-9_-]\\+'")
+  else
+   let stylesheet = split(stylefile, '[{}]')
+   " Get all lines which fit id syntax
+   let classlines = filter(copy(stylesheet), "v:val =~ '#[a-zA-Z0-9_-]\\+'")
+   " Filter out possible color definitions
+   call filter(classlines, "v:val !~ ':\\s*#[a-zA-Z0-9_-]\\+'")
+   " Filter out complex border definitions
+   call filter(classlines, "v:val !~ '\\(none\\|hidden\\|dotted\\|dashed\\|solid\\|double\\|groove\\|ridge\\|inset\\|outset\\)\\s*#[a-zA-Z0-9_-]\\+'")
+   let templines = join(classlines, ' ')
+   let stylelines = split(templines)
+   let classlines = filter(stylelines, "v:val =~ '#[a-zA-Z0-9_-]\\+'")
+
+  endif
+ endif
+ " We gathered classes definitions from all external files
+ let classes += classlines
+endfor
+</pre>
+</div>
+    </div>
+</body>
+</html>  

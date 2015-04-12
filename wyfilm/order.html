@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="万裕影城" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+<title>确认订单</title>
+<link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="nav">
+        <div class="back"><span></span></div>
+        <div class="title">确认订单</div>
+    </div>
+	<div class="order">
+        <h3>订单详情</h3>
+        <ul class="list">
+            <li>影片：<span class="title">一夜惊喜</span></li>
+            <li>版本：<span>IMAX 3D</span></li>
+            <li>影院：<span>新衡山电影院</span></li>
+            <li>影厅：<span>3 号影厅</span></li>
+            <li>场次：<span>2013-08-18 20:00</span></li>
+            <li>座位：<span>2张(02排02座、02排03座)</span></li>
+            <li>共计：<span>¥<dfn>120</dfn></span></li>
+        </ul>
+        <div class="bot">
+            <label>取票手机号：<input type="number" class="phone"></label>
+            <div><input class="submit" id="J_submit" type="button" value="确认支付"></div>
+        </div>
+	</div>	
+    <div class="popup">
+        <div class="inner">
+            <div class="tips">提示</div>
+            <div class="text">
+                <p>1) 座位锁定成功，请在15分钟内完成支付，超时系统将释放您选定的座位。</p>
+                <p>2）请仔细核对您的购票信息，影票一旦购买成功，不退不换。</p>
+            </div>
+            <div class="btn" id="J_closePopup"><a href="javascript:;">我知道了</a></div>
+        </div>
+    </div>
+<script src="zepto.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

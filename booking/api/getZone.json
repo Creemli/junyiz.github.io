@@ -1,0 +1,21 @@
+{
+    "code": 0,
+    "message": "Success",
+    "data": [
+        {
+            "id": "02101",
+            "name": "徐汇区",
+            "cinemaCount": 3
+        },
+        {
+            "id": "02102",
+            "name": "浦东新区",
+            "cinemaCount": 5
+        },
+        {
+            "id": "02103",
+            "name": "静安区",
+            "cinemaCount": 5
+        }
+    ] 
+}

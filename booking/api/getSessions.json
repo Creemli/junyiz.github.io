@@ -1,0 +1,48 @@
+[
+    {
+        "cinemaId": 1,
+        "cinemaName": "新上海影城",
+        "hallId": 1,
+        "hallName": "一号厅",
+        "playPlans": [
+            {
+                "filmId": 1,
+                "filmName": "环太平洋3D",
+                "playPlanId": 2,
+                "showDate": "2013-10-15",
+                "showTime": "09:00",
+                "targetUrl": "http://www.shfilm.net/play-plans/2/seats"
+            }, {
+                "filmId": 2,
+                "filmName": "传奇2D",
+                "playPlanId": 3,
+                "showDate": "2013-10-15",
+                "showTime": "11:30",
+                "targetUrl": "http://www.shfilm.net/play-plans/2/seats"
+            }
+        ]
+    },
+    {
+        "cinemaId": 2,
+        "cinemaName": "上海庆春电影城",
+        "hallId": 2,
+        "hallName": "一号厅",
+        "playPlans": [
+            {
+                "filmId": 1,
+                "filmName": "环太平洋3D",
+                "showDate": "2013-10-15",
+                "playPlanId": 12,
+                "showTime": "10:30",
+                "targetUrl": "http://www.shfilm.net/play-plans/12/seats"
+            }, {
+                "filmId": 2,
+                "filmName": "传奇2D",
+                "playPlanId": 21,
+                "showDate": "2013-10-15",
+                "showTime": "13:30",
+                "targetUrl": "http://www.shfilm.net/play-plans/21/seats"
+            }
+        ]
+    }
+]
