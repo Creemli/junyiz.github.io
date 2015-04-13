@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Compress JavaScript</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        padding: 10px 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .container label {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 24px;
+    }
+    .container input {
+        padding: 8px 5px;
+        width: 540px;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 24px;
+        border: 1px solid #b3b3b3;
+    }
+    .container button {
+        padding: 8px;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 24px;
+        border: 1px solid #b3b3b3;
+    }
+    .log {
+        color: #666;
+        font-size: 12px;
+        line-height: 18px;
+        padding: 3px;
+        border: 1px solid #e3e3e3;
+        margin-top: 66px;
+        overflow-y: auto;
+    }
+    .doc {
+        font-size: 18px;
+        line-height: 32px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <label>TFS Path:</label> <input type="text" id="J_tfs" placeholder="$/ResStatic/Release/162_0812/ResHotelOnline/search">
+        <button id="J_btn">Compress</button>
+    </div>
+    <div id="J_log" class="log">
+        <ol class="doc">
+            <li>1. 默认的压缩目录为：TFS_PATH/js/，存放压缩文件的目录为：TFS_PATH/js.min/</li>
+            <li>2. 日志中出现 "Changeset #XXXXXX checked in." 表示压缩成功</li>
+            <li>3. 日志中出现 "Access Denied: User CN1\junyizhang needs Checkin permission(s)" 请联系我申请签入(Checkin)权限</li>
+            <li>4. 日志中出现 "No files checked in: resolve the conflicts and try again" 请联系我处理冲突</li>
+            <li>5. 有问题、建议，请邮件(junyizhang@ctrip.com)或Lync(junyizhang)</li>
+            <li>6. 详细的使用说明，请参考<a href="http://git.dev.sh.ctripcorp.com/xuweichen/fashion-tool/blob/master/gulp/README.md">README.md</a></li>
+        </ol>
+    </div>
+
+<script>
+    var tfs = document.querySelector('#J_tfs');
+    var btn = document.querySelector('#J_btn');
+    var log = document.querySelector('#J_log');
+    var root = 'D:\\workspace\\hotel\\ResStatic';
+    log.style.height = window.innerHeight - 74 + 'px';
+
+    btn.addEventListener('click', function() {
+        var tfsPath = (tfs.value || '').replace(/(\/js)?(\/)?$/gi, '');//去掉结尾的 / 或 /js 或 /js/
+        if (!tfsPath) {
+            alert('亲，请输入TFS Path！');
+            return;
+        }
+        tfsPath = tfsPath.replace(/\$\/ResStatic/i, '').replace(/\//g, '\\\\');
+        log.innerHTML = '正在压缩...';
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/compress?tfspath=' + root + tfsPath);
+        xhr.send();
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                log.innerHTML = xhr.responseText;
+            } else {
+                log.innerHTML = xhr.statusText;
+            }
+        };
+    });
+</script>
+</body>
+</html>

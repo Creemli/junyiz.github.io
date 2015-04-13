@@ -1,0 +1,16 @@
+{
+  "name": "compress-tool",
+  "version": "0.0.2",
+  "author": "junyiz",
+  "description": "js语法检查，压缩",
+  "devDependencies": {
+    "gulp": "^3.8.1",
+    "gulp-clean": "^0.3.0",
+    "gulp-jshint": "^1.6.2",
+    "gulp-uglify": "^0.3.0",
+    "gulp-concat": "^2.4.1",
+    "gulp-tfs": "^0.0.8",
+    "gulp-jshint-file-reporter": "*",
+    "yargs": "1.2.6"
+  }
+}
