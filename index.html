@@ -1,9 +1,42 @@
+<style>
+    body {
+        font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    }
+    ul {
+        padding-left: 14px;
+    }
+    li {
+        list-style: none;
+        line-height: 30px;
+        position: relative;
+    }
+
+    li:before {
+        content: ' ';
+        position: absolute;
+        top: 14px;
+        left: -14px;
+        width: 3px;
+        height: 3px;
+        border: #656565 solid;
+        border-width: 1px 1px 1px 1px;
+        -webkit-transform: rotate(45deg);
+    }
+    li a {
+        color: #767676;
+        text-decoration: none;
+    }
+    li a:hover {
+        color: #563d7c;
+    }
+</style>
 <header>
-    <p>Welcome to junyi's HomePage.</p>
+    <p>Welcome to junyi's home page.</p>
 </header>
 <section>
     <ul>
         <li><a href="/selector">CSS Selector</a></li>
+        <li><a href="/image-to-base64.html">image to base64</a></li>
         <li><a href="/lonlat.html">高德逆地理编码</a></li>
     </ul>
     ... ...
