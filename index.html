@@ -1,6 +1,32 @@
 <style>
+    /* then for WOFF-capable browsers */
+    @font-face {
+        font-family: AdvertWeb-Light;
+        src: url("/fonts/AdvertWeb-Light.woff") format("woff");
+    }
     body {
-        font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+        font-family: AdvertWeb-Light,Menlo,Monaco,Consolas,"Courier New",monospace;
+        background-color: #242424;
+        text-align: center;
+        font-family: AdvertWeb-Light;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1.5em;
+        font-size: 14px;
+    }
+    #wrapper {
+        margin: 0 auto;
+        margin-top: 60px;
+        width: 672px;
+        text-align: left;
+        position: relative;
+    }
+    h2 {
+        color: #B0B0B0;
+        font-size: 20px;
+        font-weight: normal;
+        margin-top: 30px;
+        margin-left: 10px;
     }
     ul {
         padding-left: 14px;
@@ -22,22 +48,27 @@
         border-width: 1px 1px 1px 1px;
         -webkit-transform: rotate(45deg);
     }
-    li a {
-        color: #767676;
+    a {
+        color: #9CD9F0;
         text-decoration: none;
     }
-    li a:hover {
-        color: #563d7c;
+    a:hover {
+        color: #72B3CC;
+    }
+    p {
+        color: #B0B0B0;
     }
 </style>
-<header>
-    <p>Welcome to junyi's home page.</p>
-</header>
-<section>
-    <ul>
-        <li><a href="/selector">CSS Selector</a></li>
-        <li><a href="/image-to-base64.html">image to base64</a></li>
-        <li><a href="/lonlat.html">高德逆地理编码</a></li>
-    </ul>
-    ... ...
-</section>
+<div id="wrapper"
+    <header>
+        <h2>Junyi's home page.</h2>
+    </header>
+    <section>
+        <ul>
+            <li><a href="/selector">CSS Selector</a></li>
+            <li><a href="/image-to-base64.html">image to base64</a></li>
+            <li><a href="/lonlat.html">高德逆地理编码</a></li>
+        </ul>
+        <p>... ...</p>
+    </section>
+</div>
