@@ -50,7 +50,7 @@ Tab.Router = Backbone.Router.extend({
         $('#tab-nav li').eq(id).addClass('active');
         if (!arrUl[id]) {
             $.ajax({
-                url: 'ajax.php?n='+ id,
+                url: 'data/data'+ id + '.json',
                 dataType: 'json',
                 async: false,
                 success: function(data) {
