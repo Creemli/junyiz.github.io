@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-size: 12px;
+}
+.tags-container {
+    width: 1100px;
+    padding: 10px 10px 10px 60px;
+    border: 1px dotted #e2e2e2;
+    min-height: 25px;
+    margin: 20px auto;
+}
+.tags-container .label {
+    margin-top: 5px;
+    margin-left: -50px;
+    float: left;
+}
+.tags-list a {
+    display: inline-block;
+    margin-right: 10px;
+    line-height: 25px;
+    text-decoration: none;
+    color: #3a955d;
+}
+.diggs-container {
+    width: 1170px;
+    margin: 0 auto;
+}
+.diggs-list {
+    border-top: 1px dotted #e2e2e2;
+    list-style: none;
+}
+.diggs-list li {
+    width: 260px;
+    float: left;
+    display: inline-block;
+    background: #fff;
+    padding: 8px 10px;
+    border-bottom: 1px dotted #e2e2e2;
+    border-right: 1px dotted #e2e2e2;
+}
+.diggs-list li:hover {
+    background: #f5f5f5;
+}
+.diggs-list li:nth-child(4n) {
+    border-right: none;
+}
+.diggs-list img {
+    width: 100%;
+}
+.diggs-list .info {
+    line-height: 25px;
+}
+.diggs-list .intro {
+    height: 55px;
+    overflow: hidden;
+    line-height: 20px;
+}
+
