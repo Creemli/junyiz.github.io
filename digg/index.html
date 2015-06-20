@@ -5,13 +5,29 @@
 <link href="./style.css" rel="stylesheet" />
 </head>
 <body>
-<div class="tags-container">
-    <div class="label">Tags：</div>
-    <div class="tags-list"></div>
+<div class="container">
+    <div class="tags">
+        <div class="label">Tags：</div>
+        <div class="list"></div>
+    </div>
+    <div class="diggs">
+        <ul class="list"></ul>
+    </div>
 </div>
-<div class="diggs-container">
-    <ul class="diggs-list"></ul>
-</div>
+<script type="text/template" id="tags-tpl">
+<%_.each(results, function(item) {%>
+    <a href="#<%=item.attributes.tag%>"><%=item.attributes.txt%></a>
+<%})%>
+</script>
+<script type="text/template" id="diggs-tpl">
+<%_.each(results, function(item) {%>
+    <li>
+        <p><%=item.attributes.info%></p>
+        <p><img src="<%=item.attributes.thumb%>"/></p>
+        <p class="intro"><%=item.attributes.intro%></p>
+    </li>
+<%})%>
+</script>
 
 <script src="http://cdn.staticfile.org/zepto/1.0rc1/zepto.min.js"></script>
 <script src="http://cdn.staticfile.org/underscore.js/1.7.0/underscore-min.js"></script>
