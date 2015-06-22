@@ -5,6 +5,9 @@
 body {
     font-size: 12px;
 }
+a {
+    text-decoration: none;
+}
 .tags {
     width: 1100px;
     padding: 10px 10px 10px 60px;
@@ -19,10 +22,19 @@ body {
 }
 .tags .list a {
     display: inline-block;
-    margin-right: 10px;
-    line-height: 25px;
-    text-decoration: none;
+    margin: 5px 10px 5px 0;
+    line-height: 20px;
+    padding: 0 2px;
     color: #3a955d;
+    border-radius: 2px;
+}
+.tags .list a.selected {
+    background: #318853;
+    color: #fff;
+}
+.tags .list a:hover {
+    background: #318853;
+    color: #fff;
 }
 .diggs {
     width: 1170px;
@@ -47,10 +59,16 @@ body {
 .diggs .list li:nth-child(4n) {
     border-right: none;
 }
+.diggs .list a {
+    font-weight: bold;
+    font-size: 14px;
+    color: #666;
+}
 .diggs .list img {
     width: 100%;
 }
 .diggs .list .info {
+    height: 25px;
     line-height: 25px;
 }
 .diggs .list .intro {
@@ -58,4 +76,7 @@ body {
     overflow: hidden;
     line-height: 20px;
 }
-
+.loading {
+    padding-top: 50px;
+    text-align: center;
+}

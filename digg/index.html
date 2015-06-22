@@ -11,7 +11,7 @@
         <div class="list"></div>
     </div>
     <div class="diggs">
-        <ul class="list"></ul>
+        <ul class="list"><p class="loading">Loading...</p></ul>
     </div>
 </div>
 <script type="text/template" id="tags-tpl">
@@ -22,15 +22,15 @@
 <script type="text/template" id="diggs-tpl">
 <%_.each(results, function(item) {%>
     <li>
-        <p><%=item.attributes.info%></p>
-        <p><img src="<%=item.attributes.thumb%>"/></p>
+        <p class="info"><a href="<%=item.attributes.url%>"><%=item.attributes.info%></a></p>
+        <p><a href="<%=item.attributes.url%>"><img src="<%=item.attributes.thumb%>"/></a></p>
         <p class="intro"><%=item.attributes.intro%></p>
     </li>
 <%})%>
 </script>
 
 <script src="http://cdn.staticfile.org/zepto/1.0rc1/zepto.min.js"></script>
-<script src="http://cdn.staticfile.org/underscore.js/1.7.0/underscore-min.js"></script>
+<!--script src="http://cdn.staticfile.org/underscore.js/1.7.0/underscore-min.js"></script-->
 <script src="https://cdn1.lncld.net/static/js/av-mini-0.5.4.js"></script>
 <script src="./diggs.js"></script>
 </body>

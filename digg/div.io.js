@@ -29,9 +29,11 @@ fetchUrl('http://div.io/digg', function (error, meta, body) {
 
             $('.digg-list>ul>li').each(function (i, elem) {
                 var $el = $(this);
+                var $info = $el.find('.info a');
                 diggs.push({
                     "tag": tag,
-                    "info": $el.find('.info a').text(),
+                    "url": $info.attr('href'),
+                    "info": $info.text(),
                     "thumb": $el.find('.thumb img').attr('src'),
                     "intro": $el.find('.intro span').text()
                 });

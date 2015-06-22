@@ -8,11 +8,14 @@ var AppState = AV.Object.extend("AppState", {
 });
 var AppView = AV.View.extend({
     el: '.container',
+    events: {
+        'click .tags a': 'selectedTag'
+    },
     initialize: function () {
         this.getTags();
     },
-    tagsTpl: _.template($('#tags-tpl').text()),
-    diggsTpl: _.template($('#diggs-tpl').text()),
+    tagsTpl: AV._.template($('#tags-tpl').text()),
+    diggsTpl: AV._.template($('#diggs-tpl').text()),
     getTags: function () {
         tagsQuery.find({
             success: this.renderTags.bind(this),
@@ -30,12 +33,17 @@ var AppView = AV.View.extend({
     },
     renderDiggs: function (results) {
         this.$('.diggs .list').html(this.diggsTpl({results: results}));
+    },
+    selectedTag: function (e) {
+        var cls = 'selected';
+        $(e.target).addClass(cls).siblings('.' + cls).removeClass(cls);
+        this.$('.diggs .list').html('<p class="loading">Loading...</p>');
     }
 });
 var AppRouter = AV.Router.extend({
     routes: {
         "": "all",
-        ":tag": "tag",
+        ":tag": "tag"
     },
     initialize: function() {
         this.view = new AppView;
